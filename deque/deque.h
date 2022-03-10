@@ -4,15 +4,19 @@
 
 struct deque
 {
-    int valor;
-    struct deque* before;
-    struct deque* next;  
+    int valor[550000];
+    int tail;
+    int frente;
+    int tamanho;  
 };
 
-void insereInicio(struct deque** head, int val);
-void insereFim(struct deque** head, int val);
-int tamanhoDeque(struct deque* deque);
-void deleteInicio(struct deque** head, struct deque* home);
-void deleteLast(struct deque** head, struct deque* last);
+int cheia(struct deque* d);
+int vazia(struct deque* d);
+void inicializa(struct deque *d, int tam);
+void insereFrente(struct deque *d, int val);
+void insereTail(struct deque *d, int val);
+void removeI(struct deque *d);
+void removeT(struct deque *d);
+
 
 #endif
