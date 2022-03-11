@@ -8,7 +8,7 @@ int main()
     int val = 0, n, m;
     char func[8];
     
-    struct deque d;
+    deque d;
     inicializa(&d, m);
 
     scanf("%d %d", &n, &m);
@@ -18,16 +18,16 @@ int main()
         int funcint = 0;
         scanf("%s", &func);
 
-        if(strcmp(func, "insereI") == 0){
+        if(strcmp(func, "insereH") == 0){
             scanf(" %d", &val);
-            insereFrente(&d, val);
+            insereH(&d, val);
         }
-        else if(strcmp(func, "insereF") == 0){
+        else if(strcmp(func, "insereT") == 0){
             scanf("%d", &val);
-            insereTail(&d, val);
+            insereT(&d, val);
         }
-        else if(strcmp(func, "removeI") == 0){
-            removeI(&d);
+        else if(strcmp(func, "removeH") == 0){
+            removeH(&d);
         }
         else{
             removeT(&d);

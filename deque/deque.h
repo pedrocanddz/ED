@@ -1,22 +1,23 @@
 #ifndef DEQUE_H
 #define DEQUE_H
+#include <stdbool.h>
 
 
-struct deque
+typedef struct
 {
-    int valor[550000];
+    int *valor;
+    int head;
     int tail;
-    int frente;
-    int tamanho;  
-};
+    int tamanhoT;
+    int tamanhoFila;
+} deque;
 
-int cheia(struct deque* d);
-int vazia(struct deque* d);
-void inicializa(struct deque *d, int tam);
-void insereFrente(struct deque *d, int val);
-void insereTail(struct deque *d, int val);
-void removeI(struct deque *d);
-void removeT(struct deque *d);
-
+void inicializa(deque *d, int t);
+bool vazia(deque* d);
+bool cheia(deque* d);
+void insereT(deque *d, int val);
+void insereH(deque *d, int val);
+void removeH(deque *d);
+void removeT(deque *d);
 
 #endif
