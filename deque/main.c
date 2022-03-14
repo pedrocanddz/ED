@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <malloc.h>
 #include "deque.h"
 
 int main()
@@ -9,28 +8,27 @@ int main()
     char func[8];
     
     deque d;
-    inicializa(&d, m);
 
     scanf("%d %d", &n, &m);
+    inicializa(&d, m);
     
     for(int i = 0; i < n ; i++)
     {
-        int funcint = 0;
-        scanf("%s", &func);
+        scanf("%s", func);
 
-        if(strcmp(func, "insereH") == 0){
+        if(strcmp(func, "insereI") == 0){
             scanf(" %d", &val);
-            insereH(&d, val);
+            insereI(&d, val);
         }
-        else if(strcmp(func, "insereT") == 0){
+        else if(strcmp(func, "insereF") == 0){
             scanf("%d", &val);
-            insereT(&d, val);
+            insereF(&d, val);
         }
-        else if(strcmp(func, "removeH") == 0){
-            removeH(&d);
+        else if(strcmp(func, "removeI") == 0){
+            removeI(&d);
         }
         else{
-            removeT(&d);
+            removeF(&d);
         }
     }
 

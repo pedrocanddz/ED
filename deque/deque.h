@@ -1,11 +1,10 @@
 #ifndef DEQUE_H
 #define DEQUE_H
-#include <stdbool.h>
 
 
 typedef struct
 {
-    int *valor;
+    int valor[550000];
     int head;
     int tail;
     int tamanhoT;
@@ -13,11 +12,11 @@ typedef struct
 } deque;
 
 void inicializa(deque *d, int t);
-bool vazia(deque* d);
-bool cheia(deque* d);
-void insereT(deque *d, int val);
-void insereH(deque *d, int val);
-void removeH(deque *d);
-void removeT(deque *d);
+int vazia(deque* d);
+int cheia(deque* d);
+void insereF(deque *d, int val);
+void insereI(deque *d, int val);
+void removeI(deque *d);
+void removeF(deque *d);
 
 #endif

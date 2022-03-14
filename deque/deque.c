@@ -1,88 +1,82 @@
 #include <stdio.h>
-#include <malloc.h>
-#include <stdlib.h>
-#include <stdbool.h>
 #include "deque.h"
 void inicializa(deque *d, int t)
 {
-    d->valor = malloc(sizeof(int) * t);
     d->tamanhoT = t;
     d->tamanhoFila = 0;
     d->head = 0;
     d->tail = 0;
 }
 
-bool vazia(deque* d)
+int vazia(deque* d)
 {
-    return (d->tamanhoFila == 0);
+    if(d->tamanhoFila == 0)
+        return 1;
+    return 0;
 }
 
-bool cheia(deque* d)
+int cheia(deque* d)
 {
-    return (d->tamanhoFila == d->tamanhoT);
+    if(d->tamanhoFila == d->tamanhoT)
+        return 1;
+    return 0;
 }
 
-void insereT(deque *d, int val)
+void insereI(deque *d, int val)
 {
-    printf("%d\n", !cheia(d));
-    if(cheia(d)){
-        printf("Fouses");
+    if (cheia(d) == 1){
+        printf("cheia\n");
         return;
     }
-    d->valor[d->tail] = val;
-    d->tamanhoFila++;
-    
-    if(d->tail >= d->tamanhoT)
-        d->tail = 0;
-    else
-        d->tail++;
-}
-
-void insereH(deque *d, int val)
-{
-    printf("%d\n",!cheia(d));
-    if (cheia(d)){
-        printf("Fouses");
-        return;
-    }
-    d->valor[d->head] = val;
-    d->tamanhoFila++;
 
     if(d->head <= 0)
         d->head = d->tamanhoT - 1;//final do array
     else
         d->head--;
+    d->valor[d->head] = val;
+    d->tamanhoFila++;
 }
 
-void removeH(deque *d)
+void insereF(deque *d, int val)
 {
-    printf("%d\n",!vazia(d));
-    if(vazia(d)){
+    if(cheia(d) == 1){
+        printf("cheia\n");
+        return;
+    }
+    d->valor[d->tail] = val;
+    d->tamanhoFila++;
+    
+    d->tail = (d->tail + 1) % d->tamanhoT;
+}
+
+
+void removeI(deque *d)
+{
+    if(vazia(d) == 1){
         printf("vazia\n");
         return;
     }
-
+    
     printf("%d\n",d->valor[d->head]);
-    if(d->head >= d->tamanhoT)
+    if(d->head >= d->tamanhoT - 1)
         d->head = 0;
     else
         d->head++;
     d->tamanhoFila--;
     
 }
-void removeT(deque *d)
+void removeF(deque *d)
 {
-    printf("%d\n", !vazia(d));
-    if(vazia(d)){
+    if(vazia(d) == 1){
         printf("vazia\n");
         return;
     }
 
-    printf("%d\n",d->valor[d->tail]);
     if(d->tail <= 0)
         d->tail = d->tamanhoT - 1;
     else
         d->tail--;
+    printf("%d\n",d->valor[d->tail]);
     
     d->tamanhoFila--;
     
