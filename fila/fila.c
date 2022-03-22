@@ -21,13 +21,13 @@ void insere(fila *f, int val)
     new = malloc(sizeof(fila));
     new->prox = f->prox;
     f->prox = new;
-    f->valor = val;
+    new->valor = val;
 }
 
 int tira(fila *f)
 {
     if(vazia(f) == 1)
-        return;
+        return -1;
     fila *remove;
     remove = f->prox;
     int x = remove->valor;

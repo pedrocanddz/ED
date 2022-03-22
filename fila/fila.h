@@ -1,6 +1,7 @@
 #ifndef FILA_H
 #define FILA_H
 
+
 typedef struct pos
 {
     int valor;
@@ -9,4 +10,8 @@ typedef struct pos
 } fila;
 
 void inicializa(fila *f);
-int cheia(fila *f);
+int vazia(fila *f);
+void insere(fila *f, int val);
+int tira(fila *f);
+
+#endif
