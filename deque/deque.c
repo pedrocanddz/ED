@@ -1,88 +1,83 @@
 #include <stdio.h>
-#include <malloc.h>
 #include "deque.h"
-
-void insereInicio(struct deque** head, int val)
+void inicializa(deque *d, int t)
 {
-    struct deque* new_deque = (struct deque*)malloc(sizeof(struct deque));
- 
-    new_deque->valor = val;
- 
-    new_deque->next = (*head);
-    new_deque->before = NULL;
- 
-    if ((*head) != NULL)
-        (*head)->before = new_deque;
-
-    (*head) = new_deque;
+    d->tamanhoT = t;
+    d->tamanhoFila = 0;
+    d->head = 0;
+    d->tail = 0;
 }
 
-void insereFim(struct deque** head, int val)
+int vazia(deque* d)
 {
-    struct deque* new_deque = (struct deque*)malloc(sizeof(struct deque));
- 
-    struct deque* last = *head;
- 
-    new_deque->valor = val;
- 
-    new_deque->next = NULL;
+    if(d->tamanhoFila == 0)
+        return 1;
+    return 0;
+}
 
-    if (*head == NULL) {
-        new_deque->before = NULL;
-        *head = new_deque;
+int cheia(deque* d)
+{
+    if(d->tamanhoFila == d->tamanhoT)
+        return 1;
+    return 0;
+}
+
+void insereI(deque *d, int val)
+{
+    if (cheia(d) == 1){
+        printf("cheia\n");
         return;
     }
-    while (last->next != NULL)
-        last = last->next;
- 
-    last->next = new_deque;
- 
-    new_deque->before = last;
- 
-    return;
-}
-int tamanhoDeque(struct deque* deque)
-{
-    int tam = 0;
-    while(deque != NULL)
-    {
-        deque = deque->next;
-        tam++;
-    }
-    return tam;
 
+    if(d->head <= 0)
+        d->head = d->tamanhoT - 1;//final do array
+    else
+        d->head--;
+    d->valor[d->head] = val;
+    d->tamanhoFila++;
 }
 
-void deleteLast(struct deque** head, struct deque* last)
+void insereF(deque *d, int val)
 {
-    while (last->next != NULL) {
-        last = last->next;
+    if(cheia(d) == 1){
+        printf("cheia\n");
+        return;
     }
-    if (*head == last)
-        *head = last->next;
-
-    printf("%d\n", last->valor);
-
-    if(last->before != NULL){
-        last->before->next = NULL;
-    }
-
-    free(last);
-
+    d->valor[d->tail] = val;
+    d->tamanhoFila++;
+    
+    d->tail = (d->tail + 1) % d->tamanhoT;
 }
-void deleteInicio(struct deque** head, struct deque* home)
+
+
+void removeI(deque *d)
 {
-    if (*head == home)
-        *head = home->next;
- 
-    if (home->next != NULL)
-        home->next->before = home->before;
+    if(vazia(d) == 1){
+        printf("vazia\n");
+        return;
+    }
+    
+    printf("%d\n",d->valor[d->head]);
+    if(d->head >= d->tamanhoT - 1)
+        d->head = 0;
+    else
+        d->head++;
+    d->tamanhoFila--;
+    
+}
+void removeF(deque *d)
+{
+    if(vazia(d) == 1){
+        printf("vazia\n");
+        return;
+    }
 
-    if (home->before != NULL)
-        home->before->next = home->next;
-
-    printf("%d\n", home->valor);
-
-    free(home);
-    return;
+    if(d->tail <= 0)
+        d->tail = d->tamanhoT - 1;
+    else
+        d->tail--;
+    printf("%d\n",d->valor[d->tail]);
+    
+    d->tamanhoFila--;
+    
 }

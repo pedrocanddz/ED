@@ -2,17 +2,21 @@
 #define DEQUE_H
 
 
-struct deque
+typedef struct
 {
-    int valor;
-    struct deque* before;
-    struct deque* next;  
-};
+    int valor[550000];
+    int head;
+    int tail;
+    int tamanhoT;
+    int tamanhoFila;
+} deque;
 
-void insereInicio(struct deque** head, int val);
-void insereFim(struct deque** head, int val);
-int tamanhoDeque(struct deque* deque);
-void deleteInicio(struct deque** head, struct deque* home);
-void deleteLast(struct deque** head, struct deque* last);
+void inicializa(deque *d, int t);
+int vazia(deque* d);
+int cheia(deque* d);
+void insereF(deque *d, int val);
+void insereI(deque *d, int val);
+void removeI(deque *d);
+void removeF(deque *d);
 
 #endif
