@@ -6,7 +6,10 @@ int main()
     fila f;
     inicializa(&f);
     insere(&f, 8);
-    printf("%d %d\n", tira(&f), tira(&f));
-
+    insere(&f, 7);
+    insere(&f, 6);
+    printf("%d\n", tira(&f));
+    printf("%d\n", tira(&f));
+    printf("%d\n", tira(&f));
     return 0;
 }
