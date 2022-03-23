@@ -16,10 +16,10 @@ void insere(fila *f, int val)
     node *in = malloc(sizeof(node));
     in->valor = val;
     in->prox = NULL; // insere no fim
-    if(f->fim)
+    if(f->fim != NULL)
         f->fim->prox = in;
-    else
-        f->inicio->prox = in;
+    if(f->inicio == NULL) //1 elemento
+        f->inicio = in;
     f->fim = in;
 }
 int tira(fila *f)

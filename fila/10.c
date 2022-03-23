@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include "fila.h"
 
+void reverte(fila *f)
+{
+    if(vazia(f))
+        return;
+    int x = tira(f);
+    reverte(f);
+    printf("%d\n", x);
+}
+
 int main()
 {
     fila f;
@@ -8,8 +17,9 @@ int main()
     insere(&f, 8);
     insere(&f, 7);
     insere(&f, 6);
-    printf("%d\n", tira(&f));
-    printf("%d\n", tira(&f));
-    printf("%d\n", tira(&f));
+    reverte(&f);
+    // printf("%d\n", tira(&f));
+    // printf("%d\n", tira(&f));
+    // printf("%d\n", tira(&f));
     return 0;
 }
