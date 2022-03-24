@@ -1,12 +1,22 @@
 #ifndef FILA_H
 #define FILA_H
 
-typedef struct pos
+
+typedef struct node
 {
     int valor;
-    int tam;
-    struct pos *prox;
+    struct node *prox;
+} node;
+
+typedef struct {
+    node *inicio;
+    node *fim;
 } fila;
 
 void inicializa(fila *f);
-int cheia(fila *f);
+int vazia(fila *f);
+void insere(fila *f, int val);
+int tira(fila *f);
+void imprimeLista(fila *f);
+
+#endif
