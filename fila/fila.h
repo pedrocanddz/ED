@@ -17,5 +17,6 @@ void inicializa(fila *f);
 int vazia(fila *f);
 void insere(fila *f, int val);
 int tira(fila *f);
+void imprimeLista(fila *f);
 
 #endif
