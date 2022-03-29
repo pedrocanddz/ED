@@ -7,14 +7,14 @@ int main()
 {
     int val, n, m;
     char func[8];
-    struct deque* head = NULL;
+    deque d;
+    inicializa(&d);
 
     scanf("%d %d", &n, &m);
     
     for(int i = 0; i < n ; i++)
     {
         int funcint = 0;
-        int tam = tamanhoDeque(head);
         scanf("%s", func);
 
         if(strcmp(func, "insereI") == 0){
@@ -33,33 +33,17 @@ int main()
         {
         case 1: // insereI
             scanf(" %d", &val);
-        if(tam >= m){
-            printf("cheia\n");
-            break;
-        }
-            insereInicio(&head, val);
+            insereInicio(&d, val);
             break;       
         case 2: // insereF
             scanf("%d", &val);
-        if(tam >= m){
-            printf("cheia\n");
-            break;
-        }
-            insereFim(&head, val);
+            insereFim(&d, val);
             break;     
         case 3: // removeI
-        if(tam == 0){
-            printf("vazia\n");
-            break;
-        }       
-            deleteInicio(&head, head);
+            deleteInicio(&d);
             break;     
         case 4: // removeF
-        if(tam == 0){
-            printf("vazia\n");
-            break;
-        }
-            deleteLast(&head, head);
+            deleteLast(&d);
             break;
         }
     }

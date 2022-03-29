@@ -2,87 +2,90 @@
 #include <malloc.h>
 #include "deque.h"
 
-void insereInicio(struct deque** head, int val)
+int vazia(deque* d)
 {
-    struct deque* new_deque = (struct deque*)malloc(sizeof(struct deque));
- 
-    new_deque->valor = val;
- 
-    new_deque->next = (*head);
-    new_deque->before = NULL;
- 
-    if ((*head) != NULL)
-        (*head)->before = new_deque;
-
-    (*head) = new_deque;
+    return (d->head == NULL);
 }
 
-void insereFim(struct deque** head, int val)
+void inicializa(deque* d)
 {
-    struct deque* new_deque = (struct deque*)malloc(sizeof(struct deque));
+    d->head = NULL;
+    d->end = NULL;
+    d->elementos = 0;
+}
+void insereInicio(deque* d, int val)
+{
+    node* nova_node = (node*)malloc(sizeof(node));
  
-    struct deque* last = *head;
- 
-    new_deque->valor = val;
- 
-    new_deque->next = NULL;
+    nova_node->valor = val;
+    nova_node->prev = NULL;
+    if(d->head == NULL)
+        nova_node->next = NULL;
+    
+    if (d->head != NULL)
+        d->head->prev = nova_node;
+    d->elementos++;
+    d->head = nova_node;
+}
 
-    if (*head == NULL) {
-        new_deque->before = NULL;
-        *head = new_deque;
+void insereFim(deque* d, int val)
+{
+    node* n = (node*)malloc(sizeof(node));
+ 
+ 
+    n->valor = val;
+ 
+    n->next = NULL;
+
+    if (d->head == NULL) {
+        n->prev = NULL;
+        d->head = n;
         return;
     }
-    while (last->next != NULL)
-        last = last->next;
- 
-    last->next = new_deque;
- 
-    new_deque->before = last;
+    
+    d->end->next = n;
+    d->elementos++;
+    n->prev = d->end;
  
     return;
 }
-int tamanhoDeque(struct deque* deque)
+
+void deleteLast(deque *d)
 {
-    int tam = 0;
-    while(deque != NULL)
-    {
-        deque = deque->next;
-        tam++;
+    // while (last->next != NULL) {
+    //     last = last->next;
+    // }
+    // if (head == last)
+    //     head = last->next;
+    if(vazia(d)){
+        printf("vazia\n");
+        return;
     }
-    return tam;
+    node *remove = d->end;
+    printf("%d\n", remove->valor);
+
+    if(remove->prev != NULL){
+        remove->prev->next = NULL;
+    }
+
+    free(remove);
 
 }
-
-void deleteLast(struct deque** head, struct deque* last)
+void deleteInicio(deque *d)
 {
-    while (last->next != NULL) {
-        last = last->next;
+    node *n = d->head;
+    if(vazia(d)){
+        printf("vazia\n");
+        return;
     }
-    if (*head == last)
-        *head = last->next;
-
-    printf("%d\n", last->valor);
-
-    if(last->before != NULL){
-        last->before->next = NULL;
+    
+    if (n->next == NULL)
+        d->head = NULL;
+    else{
+        d->head = n->next;
     }
+    printf("%d\n", n->valor);
 
-    free(last);
-
-}
-void deleteInicio(struct deque** head, struct deque* home)
-{
-    if (*head == home)
-        *head = home->next;
- 
-    if (home->next != NULL)
-        home->next->before = home->before;
-
-    if (home->before != NULL)
-        home->before->next = home->next;
-
-    printf("%d\n", home->valor);
-
-    free(home);
+    free(n);
     return;
 }

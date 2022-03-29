@@ -1,18 +1,24 @@
 #ifndef DEQUE_H
 #define DEQUE_H
 
-
-struct deque
-{
+typedef struct node{
     int valor;
-    struct deque* before;
-    struct deque* next;  
-};
+    struct node* prev;
+    struct node* next;
+}node;
 
-void insereInicio(struct deque** head, int val);
-void insereFim(struct deque** head, int val);
-int tamanhoDeque(struct deque* deque);
-void deleteInicio(struct deque** head, struct deque* home);
-void deleteLast(struct deque** head, struct deque* last);
+typedef struct deque
+{
+    struct node* head;
+    struct node* end;  
+    int elementos;
+}deque;
+
+int vazia(deque* d);
+void inicializa(deque* d);
+void insereInicio(deque* d, int val);
+void insereFim(deque* d, int val);
+void deleteInicio(deque *d);
+void deleteLast(deque *d);
 
 #endif
