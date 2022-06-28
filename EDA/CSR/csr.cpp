@@ -53,6 +53,25 @@ int main ()
     free(c);
     return 0;
 }
+int achaPos(int a[], int b[], int c[], int x, int y)
+{
+    int intervalo = c[x] - c[x+1];
+    int valor = 0;
+    if(intervalo == 0)
+        return 0;
+    else
+    {
+        for(int i = b[c[x]]; i < b[c[x + 1] - 1]; i++)
+        {
+            if(b[i] == y)
+            {
+                valor = a[i];
+                break;
+            }
+        }
+        return valor;
+    }
+}
 
 int achaPos(int a[], int b[], int c[], int k, int x, int y, int linhas){//Recebe uma cordenada x,y e retorna o valor na matriz CSR, caso não ache retorna 0
     if(x > linhas)
