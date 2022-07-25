@@ -12,7 +12,7 @@ void inordem(node* root);
 void posOrdem(node* root);
 node* inicializa(int val);
 node* insere(node* root, node* p, int level);
-
+int maxHeight(node *root);
 using namespace std;
 int main(){
     node *root = NULL;
@@ -22,7 +22,7 @@ int main(){
         int x;
         cin >> x;
         node* inserir = inicializa(x);
-        root = insere(root, inserir, 0);
+        root = insere(root, inserir, 1);
     }
     cout << "Pr.: ";
     preordem(root);
@@ -35,10 +35,14 @@ int main(){
     cout << "Po.: ";
     posOrdem(root);
     cout << endl;
-    for(int  i = 0; i < n; i++){
-        
-    }
+    cout << (maxHeight(root)) << endl;
+
     return 0;
+}
+int maxHeight(node *root){
+    if(root == NULL)
+        return 0;
+    return 1 + max(maxHeight(root->left), maxHeight(root->right));
 }
 void inNivel(node* root, int level){
     if(root == NULL)
