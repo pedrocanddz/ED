@@ -46,7 +46,6 @@ int main(){
     cout << "Po.:";
     posOrdem(root);
     cout << endl;
-     
     cout << "Ni.:";
     //para cada nível da árvore, imprime todos os nós do nível
     for(int i = 1; i <= maxHeight(root); i++)
