@@ -84,27 +84,28 @@ void destroiGraph(Graph *g){
 void adicionaArco(Graph *g, int u, int v){
     link* n = (link*) malloc(sizeof(link));
     n->vertice = v;
+    
     n->next = g->adj[u];
     g->adj[u] = n;
-    
 }
 
 void bfs(Graph *g){
     int *vis =(int*) malloc(sizeof(int) * g->v);
-    for(int i = 0; i < g->v; i++){
-        vis[i] = 0;
-    }
+    
+    for(int i = 0; i < g->v; i++)
+		vis[i] = 0;
+    
 
     fila *f = inicializarFila(g->v);
-    insereFila(f, g->adj[0]->vertice);
+    insereFila(f, 0);
 
     while(!vazia(f)){
         int retirado = retiraFila(f);
-        cout << retirado;
-        vis[retirado - 1] = 1;
-        link* n = g->adj[retirado - 1];
-        cout << g->adj[0]->vertice << "\n";
-        for(link* t = g->adj[retirado - 1]; t != NULL; t = t->next){
+        cout << retirado << " ";
+        vis[retirado] = 1;
+        //link* n = g->adj[retirado];
+        
+        for(link* t = g->adj[retirado]; t != NULL; t = t->next){
             if(!vis[t->vertice])
                 insereFila(f, t->vertice);
         }
